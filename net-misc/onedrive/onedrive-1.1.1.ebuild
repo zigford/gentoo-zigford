@@ -13,8 +13,8 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="
-	=dev-lang/dmd-2.0.79.1
-	dev-util/dub[dmd-2_079]
+	=dev-lang/dmd-2.0.78
+	dev-util/dub[dmd-2_078]
 "
 RDEPEND="${DEPEND}
 	net-misc/curl
