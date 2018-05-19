@@ -13,7 +13,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="
-	=dev-lang/dmd-2.0.79
+	=dev-lang/dmd-2.0.79.1
 	dev-util/dub[dmd-2_079]
 "
 RDEPEND="${DEPEND}
