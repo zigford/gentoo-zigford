@@ -13,7 +13,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="
-	=dev-lang/dmd-2.0.80
+	=dev-lang/dmd-2.080.0
 	dev-util/dub[dmd-2_080]
 	dev-db/sqlite
 "
