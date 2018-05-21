@@ -7,18 +7,18 @@ DESCRIPTION="Onedrive sync client for Linux"
 HOMEPAGE="https://github.com/skilion/onedrive"
 SRC_URI="https://github.com/skilion/onedrive/archive/v1.1.1.tar.gz -> ${P}.tar.gz"
 
-LICENSE="GPL3"
+LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="
-	=dev-lang/dmd-2.0.78
-	dev-util/dub[dmd-2_078]
+	=dev-lang/dmd-2.0.80
+	dev-util/dub[dmd-2_080]
+	dev-db/sqlite
 "
 RDEPEND="${DEPEND}
 	net-misc/curl
-	dev-db/sqlite
 	"
 src_prepare() {
 	default
