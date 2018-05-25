@@ -23,6 +23,9 @@ RDEPEND="${DEPEND}
 src_prepare() {
 	default
 	# Update the makefile so that it doesnt use git commands to get the version during build.
-	sed -i -e 's/version:.*/version:/' Makefile
-	sed -i -e '$s/.*/\techo v1.1.2 > version/' Makefile
+	sed -i -e 's/version:.*/version:/' \
+		-e '$s/.*/\techo v1.1.2 > version/' \
+		-e 's/ \/var/ $(DESTDIR)\/var/' \
+		-e 's/ \/etc\/log/ $(DESTDIR)\/etc\/log/' \
+		Makefile
 }
