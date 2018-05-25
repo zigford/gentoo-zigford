@@ -27,5 +27,6 @@ src_prepare() {
 		-e '$s/.*/\techo v1.1.2 > version/' \
 		-e 's/ \/var/ $(DESTDIR)\/var/' \
 		-e 's/ \/etc\/log/ $(DESTDIR)\/etc\/log/' \
+		-e '30i\t\tmkdir -p $(DESTDIR)/usr/lib/systemd/user'
 		Makefile
 }
