@@ -1,0 +1,18 @@
+#!/sbin/runscript
+# Copyright 1999-2015 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Id$
+
+depend() {
+	after xdm
+}
+
+start() {
+	start-stop-daemon --start --background --chdir /usr/lib/displaylink --make-pidfile --pidfile /run/displaylink.pid --exec /usr/lib/displaylink/DisplayLinkManager
+	eend $?
+}
+
+stop() {
+	start-stop-daemon --stop --pidfile /run/displaylink.pid
+	eend $?
+}
