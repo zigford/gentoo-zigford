@@ -28,7 +28,8 @@ CONFIG_CHECK="	CGROUPS \
 		SQUASHFS_XZ \
 		BLK_DEV_LOOP \
 		SECCOMP \
-		SECCOMP_FILTER"
+		SECCOMP_FILTER \
+		SECURITY_APPARMOR"
 
 export GOPATH="${S}/${PN}"
 
@@ -116,14 +117,12 @@ src_install() {
 	cd "${MY_S}"
 	dodir  \
 		"/etc/profile.d" \
-		"/usr/lib/snapd" \
+		"/usr/lib64/snapd" \
 		"/usr/share/dbus-1/services" \
 		"/usr/share/polkit-1/actions" \
 		"/var/lib/snapd"
 
-
-
-	exeinto "/usr/lib/${PN}"
+	exeinto "/usr/lib64/${PN}"
 	doexe \
 			data/completion/etelpmoc.sh \
 			data/completion/complete.sh
@@ -145,12 +144,12 @@ src_install() {
 	doexe "${S}/bin"/snap-seccomp ### missing libseccomp
 	doexe "${MY_S}/cmd/snapd-apparmor/snapd-apparmor"
 
-	insinto "/usr/lib/snapd/"
+	insinto "/usr/lib64/snapd/"
 	doins "${MY_S}/data/info"
 	insinto "/etc/profile.d/"
 	doins data/env/snapd.sh
 	insinto "/etc/apparmor.d"
-	doins "${C}/snap-confine/usr.lib.snapd.snap-confine"
+	doins "${C}/snap-confine/usr.lib.snapd.snap-confine.real"
 	
 	dodoc	"${MY_S}/packaging/ubuntu-14.04"/copyright \
 		"${MY_S}/packaging/ubuntu-16.04"/changelog
@@ -168,18 +167,29 @@ src_install() {
 pkg_postrm() {
 	debug-print-function $FUNCNAME "$@"
 
-	systemctl disable snapd.service
-	systemctl stop snapd.service
-	systemctl disable snapd.socket
-	# unmount and remove old snaps
-    if [[ -d /snap ]]; then
-	    for i in /snap/*; do
-	        if [[ -d "${i}" ]]; then
-		        if mount | grep -q "${i}"; then
-			        umount "${i}/current"
-			    fi
-		    fi
-	    cd /
-		rm -rf snap
-    fi 
+	if systemctl is-active --quiet snapd.service snapd.socket; then
+		snapd_was_active=yes
+		systemctl stop snapd.socket snapd.service snapd.apparmor.service
+	fi
+	umount /var/lib/snapd/snaps/*.snap
+	rm -rf /var/lib/snapd/*
+	rm -f /etc/systemd/system/snap-*.mount
+	rm -f /etc/systemd/system/snap-*.service
+	rm -f /etc/systemd/system/multi-user.target.wants/snap-*.mount
+	rm -rf /snap/*
+}
+
+pkg_postinst() {
+	CMDLINE=$(cat /proc/cmdline) 
+	if [[ $CMDLINE == *"apparmor=1"* ]] && [[ $CMDLINE == *"security=apparmor"* ]]; then
+	    apparmor_parser -r /etc/apparmor.d/usr.lib.snapd.snap-confine.real
+		einfo "Enable snapd snapd.socket and snapd.apparmor service, then reload the apparmor service to start using snapd"
+	else 
+		einfo ""
+		einfo "Apparmor needs to be enabled and configred as the default security"
+		einfo "Ensure /etc/default/grub is updated to include:"
+		einfo "GRUB_CMDLINE_LINIX_DEFAULT=\"apparmor=1 security=apparmor\""
+		einfo "Then update grub, enable snapd, snapd.socket and snapd.apparmor and reboot"
+		einfo ""
+	fi
 }
