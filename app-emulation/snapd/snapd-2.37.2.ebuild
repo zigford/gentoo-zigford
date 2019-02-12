@@ -160,6 +160,7 @@ src_install() {
 
 	domo "${MY_S}/po"/*.mo
 
+	doexe "${C}"/snap-confine/snap-device-helper
 	exeopts -m 6755
 	doexe "${C}"/snap-confine/snap-confine
 }
