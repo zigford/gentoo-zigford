@@ -19,7 +19,6 @@ RDEPEND="
 	>=dev-python/tqdm-4.5.0[${PYTHON_USEDEP}]
 	>=dev-python/six-1.10[${PYTHON_USEDEP}]
 	dev-python/b2sdk[${PYTHON_USEDEP}]
-	dev-python/backports-functools-lru-cache[${PYTHON_USEDEP}]
 "
 
 DEPEND="${RDEPEND}"

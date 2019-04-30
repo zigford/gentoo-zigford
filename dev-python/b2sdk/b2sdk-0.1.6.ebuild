@@ -22,7 +22,7 @@ RDEPEND="
 	dev-python/logfury[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/setuptools[${PYTHON_USEDEP}]
-	dev-python/futures[${PYTHON_USEDEP}]
+	virtual/python-futures[${PYTHON_USEDEP}]
 "
 DEPEND="${RDEPEND}"
 
