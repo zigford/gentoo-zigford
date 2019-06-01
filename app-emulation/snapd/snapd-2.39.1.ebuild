@@ -11,7 +11,7 @@ SRC_URI="https://github.com/snapcore/${PN}/releases/download/${PV}/${PN}_${PV}.v
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64"
+KEYWORDS="~amd64"
 IUSE=""
 RESTRICT="primaryuri"
 
@@ -45,6 +45,8 @@ DEPEND="${RDEPEND}
 	dev-python/docutils
 	sys-devel/gettext
 	sys-fs/xfsprogs"
+
+#PATCHES=("${FILESDIR}"/snapd.patch)
 
 src_configure() {
 	debug-print-function $FUNCNAME "$@"
@@ -80,7 +82,8 @@ src_compile() {
 	VX="-v -x" # or "-v -x" for verbosity
 	for I in snapctl snap-exec snap snapd snap-seccomp snap-update-ns; do
 		einfo "go building: ${I}"
-		go install $VX "github.com/snapcore/${PN}/cmd/${I}"
+		go install --ldflags '-extldflags "-Wl,--build-id=sha1"' \
+		    $VX "github.com/snapcore/${PN}/cmd/${I}"
 	done
 	"${S}/bin/snap" help --man > "${C}/snap/snap.1"
 	rst2man.py "${C}/snap-confine/"snap-confine.{rst,1}
