@@ -68,7 +68,6 @@ EOF
 		--enable-maintainer-mode \
 		--disable-silent-rules \
 		--enable-apparmor
-		epatch
 }
 
 src_compile() {
