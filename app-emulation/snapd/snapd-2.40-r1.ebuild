@@ -64,8 +64,8 @@ EOF
 	test -f configure.ac	# Sanity check, are we in the right directory?
 	rm -f config.status
 	autoreconf -i -f	# Regenerate the build system
-	econf --libdir="/usr/lib64" \
-		--libexecdir="/usr/lib64/snapd" \
+	econf --libdir="/usr/$(get_libdir)" \
+		--libexecdir="/usr/$(get_libdir)/snapd" \
 		--enable-maintainer-mode \
 		--disable-silent-rules \
 		--enable-apparmor
@@ -75,7 +75,7 @@ src_compile() {
 	debug-print-function $FUNCNAME "$@"
 
 	C="${MY_S}/cmd/"
-	emake LIBEXECDIR="/usr/lib64" -C "${MY_S}/data/"
+	emake LIBEXECDIR="/usr/$(get_libdir)" -C "${MY_S}/data/"
 	emake -C "${C}"
 
 	# Generate snapd-apparmor systemd unit
@@ -98,8 +98,9 @@ src_compile() {
 	done
 
 	# Generate apparmor profile
-	sed -e 's,[@]LIBEXECDIR[@],/usr/lib64/snapd,g' \
+	sed -e "s,[@]LIBEXECDIR[@],/usr/$(get_libdir)/snapd,g" \
 		-e 's,[@]SNAP_MOUNT_DIR[@],/snap,' \
+		-e "/snap-device-helper/s/lib/$(get_libdir)/" \
 		"${C}/snap-confine/snap-confine.apparmor.in" \
 		> "${C}/snap-confine/usr.lib.snapd.snap-confine.real"
 }
@@ -128,7 +129,7 @@ src_install() {
 		"/usr/share/polkit-1/actions" \
 		"/var/lib/snapd"
 
-	exeinto "/usr/lib64/${PN}"
+	exeinto "/usr/$(get_libdir)/${PN}"
 	doexe \
 			data/completion/etelpmoc.sh \
 			data/completion/complete.sh
@@ -150,7 +151,7 @@ src_install() {
 	doexe "${S}/bin"/snap-seccomp ### missing libseccomp
 	doexe "${MY_S}/cmd/snapd-apparmor/snapd-apparmor"
 
-	insinto "/usr/lib64/snapd/"
+	insinto "/usr/$(get_libdir)/snapd/"
 	doins "${MY_S}/data/info"
 	insinto "/etc/profile.d/"
 	doins data/env/snapd.sh
