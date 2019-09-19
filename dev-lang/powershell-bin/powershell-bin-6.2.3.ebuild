@@ -49,6 +49,8 @@ src_install() {
 	if test -d opt
 	then
 		cp -pPR "${S}"/{opt,usr/bin} "${D}"/ || die "Failed to copy files"
+		gunzip "${S}/usr/local/share/man/man1/pwsh.1.gz"
+		doman "${S}/usr/local/share/man/man1/pwsh.1"
 	else
 		OPTDIR="opt/microsoft/powershell/${PV:0:1}${PREVIEW:+-preview}"
 		dodir "${EPREFIX}/${OPTDIR}"
