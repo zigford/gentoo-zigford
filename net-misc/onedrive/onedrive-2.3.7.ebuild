@@ -1,1 +1,0 @@
-onedrive-2.3.5.ebuild
