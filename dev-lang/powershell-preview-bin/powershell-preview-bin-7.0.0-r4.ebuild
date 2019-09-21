@@ -56,7 +56,7 @@ src_install() {
 		dodir "${EPREFIX}/${OPTDIR}"
 		insinto "${EPREFIX}/${OPTDIR}"
 		doins -r */ || die
-		for i in a dll json pdb so txt xml
+		for i in a dll json pdb so txt xml md
 		do
 		    doins *.$i
 		done
