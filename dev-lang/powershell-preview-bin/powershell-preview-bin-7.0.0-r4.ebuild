@@ -60,6 +60,13 @@ src_install() {
 		do
 		    doins *.$i
 		done
+		for i in createdump
+		do
+			if test -f "${i}"
+			then
+				doins "${i}"
+			fi
+		done
 		exeinto "${EPREFIX}/${OPTDIR}"
 		doexe pwsh || die
 		dodir "${EPREFIX}/bin"
