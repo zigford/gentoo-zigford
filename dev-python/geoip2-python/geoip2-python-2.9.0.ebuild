@@ -17,6 +17,7 @@ KEYWORDS="~amd64"
 
 RDEPEND="
 	dev-python/requests[${PYTHON_USEDEP}]
+	dev-python/maxmind-db-reader[${PYTHON_USEDEP}]
 "
 
 DEPEND="${RDEPEND}"
@@ -26,13 +27,3 @@ BDEPEND="
 "
 
 S="${WORKDIR}/GeoIP2-python-${PV}"
-
-# src_prepare() {
-# 	cd "${S}"
-# 	sed -ie 's/b2=b2/b2cli=b2/' setup.py
-# 	default
-# }
-# 
-# python_install_all() {
-# 	distutils-r1_python_install_all
-# }
