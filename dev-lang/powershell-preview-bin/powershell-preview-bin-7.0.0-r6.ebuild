@@ -22,6 +22,8 @@ SRC_URI="
 	arm64? ( https://github.com/PowerShell/PowerShell/releases/download/v${PV}${MY_V}/powershell-${PV}${MY_V}-linux-arm64.tar.gz )
 "
 
+RESTRICT="primaryuri strip"
+
 LICENSE=""
 SLOT="0"
 KEYWORDS="~amd64 ~arm64"
