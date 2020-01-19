@@ -29,7 +29,7 @@ pkg_setup() {
 
 src_unpack() {
 	unpack ${A}
-	mv NzbDrone ${MY_PN}
+	mv Sonarr ${MY_PN}
 }
 
 src_install() {
