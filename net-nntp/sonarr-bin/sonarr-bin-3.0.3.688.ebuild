@@ -12,7 +12,7 @@ HOMEPAGE="http://www.sonarr.tv"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~arm64 ~amd64 ~x86"
 IUSE="systemd"
 RDEPEND="
 	>=dev-lang/mono-4.4.1.0
