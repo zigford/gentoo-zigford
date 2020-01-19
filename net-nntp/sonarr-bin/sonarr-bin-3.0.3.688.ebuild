@@ -19,8 +19,8 @@ RDEPEND="
 	media-video/mediainfo
 	dev-db/sqlite"
 
-S=${WORKDIR}/${MY_PN}
 MY_PN=sonarr
+S=${WORKDIR}/${MY_PN}
 
 pkg_setup() {
 	enewgroup ${MY_PN}
