@@ -2,9 +2,9 @@
     <repo priority="-900" status="unofficial">
         <name>zigford</name>
         <description>Personal overlay for Jesse Harris</description>
-        <homepage>http://jesseharrisit.com</homepage>
+        <homepage>https://zigford.org</homepage>
         <owner>
-            <email>jesse@jesseharrisit.com</email>
+            <email>jesse@zigford.org</email>
             <name>Jesse Harris IT</name>
         </owner>
         <source type="git">git://github.com/zigford/gentoo-zigford.git</source>

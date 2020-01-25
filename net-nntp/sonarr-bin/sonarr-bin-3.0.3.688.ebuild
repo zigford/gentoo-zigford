@@ -12,15 +12,15 @@ HOMEPAGE="http://www.sonarr.tv"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~arm64 ~amd64 ~x86"
 IUSE="systemd"
 RDEPEND="
 	>=dev-lang/mono-4.4.1.0
 	media-video/mediainfo
 	dev-db/sqlite"
 
-S=${WORKDIR}/${MY_PN}
 MY_PN=sonarr
+S=${WORKDIR}/${MY_PN}
 
 pkg_setup() {
 	enewgroup ${MY_PN}
@@ -29,7 +29,7 @@ pkg_setup() {
 
 src_unpack() {
 	unpack ${A}
-	mv NzbDrone ${MY_PN}
+	mv Sonarr ${MY_PN}
 }
 
 src_install() {
