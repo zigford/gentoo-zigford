@@ -1,0 +1,9 @@
+[Unit]
+Description=Nagios Cross-Platform Agent
+
+[Service]
+Type=forking
+ExecStart=/usr/share/ncpa/ncpa_listener -c /usr/share/ncpa/etc/ncpa.cfg
+
+[Install]
+WantedBy=multi-user.target
