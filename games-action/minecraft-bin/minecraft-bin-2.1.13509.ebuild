@@ -10,9 +10,9 @@ inherit desktop
 DESCRIPTION="An open-world game whose gameplay revolves around breaking and placing blocks"
 HOMEPAGE="http://www.minecraft.net"
 SRC_URI="
-  https://github.com/Tabinol/gentoo-minecraft/archive/2.1.2482.tar.gz -> ${P}-sh.tar.gz
-  https://launcher.mojang.com/download/linux/x86_64/minecraft-launcher_${PV}.tar.gz -> ${P}.tar.gz"
-	
+	https://github.com/Tabinol/gentoo-minecraft/archive/2.1.2482.tar.gz -> ${P}-sh.tar.gz
+	https://launcher.mojang.com/download/linux/x86_64/minecraft-launcher_${PV}.tar.gz -> ${P}.tar.gz"
+
 LICENSE="Minecraft"
 SLOT="0"
 KEYWORDS="~amd64"
@@ -21,8 +21,9 @@ RESTRICT="mirror"
 S="${WORKDIR}/gentoo-minecraft-${PV}"
 
 RDEPEND=">=virtual/jre-1.8.0
-  >=x11-apps/xrandr-1.4.3
-  virtual/ttf-fonts"
+	>=x11-apps/xrandr-1.4.3
+	virtual/ttf-fonts
+	media-libs/libglvnd"
 
 DEPEND=""
 
@@ -40,8 +41,11 @@ src_install() {
 	fperms +x /opt/${MY_PN}/chrome-sandbox
 	fperms +x /opt/${MY_PN}/libcef.so
 	fperms +x /opt/${MY_PN}/minecraft-launcher
+	dodir /opt/${MY_PN}/swiftshader
+	dosym /usr/$(get_libdir)/libEGL.so /opt/${MY_PN}/swiftshader/libEGL.so
+	dosym /usr/$(get_libdir)/libGLESv2.so /opt/${MY_PN}/swiftshader/libGLESv2.so
 	popd
-  dobin "${MY_PN}"
+	dobin "${MY_PN}"
 	doicon "${MY_PN}.png"
 	make_desktop_entry "${MY_PN}" "Minecraft" "minecraft"
 }
