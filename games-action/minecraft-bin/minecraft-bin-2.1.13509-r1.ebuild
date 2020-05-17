@@ -27,6 +27,7 @@ S="${WORKDIR}/gentoo-minecraft-${PV}"
 RDEPEND=">=virtual/jre-1.8.0
 	>=x11-apps/xrandr-1.4.3
 	virtual/ttf-fonts
+	gnome-base/gconf
 	libglvnd? ( media-libs/libglvnd )"
 
 DEPEND=""
