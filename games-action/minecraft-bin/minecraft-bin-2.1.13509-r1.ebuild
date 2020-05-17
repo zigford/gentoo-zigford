@@ -18,12 +18,16 @@ SLOT="0"
 KEYWORDS="~amd64"
 RESTRICT="mirror"
 
+# Optionally enable the skins tab. Allow to disable where libglvnd is not desired
+
+IUSE="libglvnd"
+
 S="${WORKDIR}/gentoo-minecraft-${PV}"
 
 RDEPEND=">=virtual/jre-1.8.0
 	>=x11-apps/xrandr-1.4.3
 	virtual/ttf-fonts
-	media-libs/libglvnd"
+	libglvnd? ( media-libs/libglvnd )"
 
 DEPEND=""
 
