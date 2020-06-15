@@ -12,7 +12,7 @@ LICENSE="all-rights-reserved"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE=""
-RESTRICT="primaryuri strip"
+RESTRICT="primaryuri strip mirror"
 
 DEPEND=""
 RDEPEND="${DEPEND}"
