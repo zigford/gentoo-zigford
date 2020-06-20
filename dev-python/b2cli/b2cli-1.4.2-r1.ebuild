@@ -18,7 +18,7 @@ KEYWORDS="~amd64"
 RDEPEND="
 	>=dev-python/tqdm-4.5.0[${PYTHON_USEDEP}]
 	>=dev-python/six-1.10[${PYTHON_USEDEP}]
-	dev-python/b2sdk[${PYTHON_USEDEP}]
+	=dev-python/b2sdk-0.1.8[${PYTHON_USEDEP}]
 "
 
 DEPEND="${RDEPEND}"
