@@ -3,7 +3,7 @@
 
 EAPI="7"
 
-PYTHON_COMPAT=( python{2_7,3_5,3_6,3_7} )
+PYTHON_COMPAT=( python{3_6,3_7,3_8} )
 
 inherit distutils-r1
 
@@ -18,7 +18,7 @@ KEYWORDS="~amd64"
 RDEPEND="
 	>=dev-python/tqdm-4.5.0[${PYTHON_USEDEP}]
 	>=dev-python/six-1.10[${PYTHON_USEDEP}]
-	<dev-python/arrow-0.13.1[${PYTHON_USEDEP}]
+	>=dev-python/arrow-0.8.0[${PYTHON_USEDEP}]
 	dev-python/logfury[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/setuptools[${PYTHON_USEDEP}]
