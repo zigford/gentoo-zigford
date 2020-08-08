@@ -27,6 +27,17 @@ BDEPEND="
 	dev-python/setuptools[${PYTHON_USEDEP}]
 "
 
+PATCHES="${FILESDIR}/core.py.patch"
+
 python_install_all() {
 	distutils-r1_python_install_all
+	MY_S=/usr/libexec/auto-cpufreq/scripts
+	dodir "${MY_S}"
+	cd scripts
+	exeinto "${MY_S}"
+	doexe auto-cpufreq-install.sh
+	doexe auto-cpufreq-remove.sh
+	doexe cpufreqctl.sh
+	insinto "${MY_S}"
+	doins auto-cpufreq.service
 }
