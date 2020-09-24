@@ -19,10 +19,9 @@ RDEPEND="
 	>=dev-python/tqdm-4.5.0[${PYTHON_USEDEP}]
 	>=dev-python/six-1.10[${PYTHON_USEDEP}]
 	>=dev-python/arrow-0.8.0[${PYTHON_USEDEP}]
-	dev-python/logfury[${PYTHON_USEDEP}]
-	dev-python/requests[${PYTHON_USEDEP}]
+	>=dev-python/logfury-0.1.2[${PYTHON_USEDEP}]
+	>=dev-python/requests-2.9.1[${PYTHON_USEDEP}]
 	dev-python/setuptools[${PYTHON_USEDEP}]
-	virtual/python-futures[${PYTHON_USEDEP}]
 "
 DEPEND="${RDEPEND}"
 
