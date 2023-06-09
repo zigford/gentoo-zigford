@@ -32,12 +32,12 @@ DEPEND="
 	x11-libs/libXi
 	x11-libs/pango
 	gnome? (
-		>=x11-wm/mutter-43.0
+		>=x11-wm/mutter-44.0
 	)
 	introspection? (
 		dev-libs/gjs
-		>=dev-libs/gobject-introspection-1.48.0
-		>=x11-wm/mutter-43.0[introspection]
+		>=dev-libs/gobject-introspection-1.76.0
+		>=x11-wm/mutter-44.0[introspection]
 	)
 "
 BDEPEND="
@@ -63,7 +63,7 @@ RDEPEND="${DEPEND}
 S="${WORKDIR}/GPaste-${PV}"
 
 src_prepare() {
-	use vala && vala_src_prepare
+	use vala && vala_setup
 	default
 }
 
