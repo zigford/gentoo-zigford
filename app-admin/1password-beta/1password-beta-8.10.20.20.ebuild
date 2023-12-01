@@ -1,1 +1,0 @@
-../1password/1password-8.10.18.ebuild
