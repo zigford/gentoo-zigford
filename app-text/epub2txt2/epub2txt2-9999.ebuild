@@ -1,9 +1,9 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
-inherit git-r3 eutils multilib
+inherit git-r3 multilib
 
 DESCRIPTION="A simple command-line utility for extracting text from EPUB documents"
 HOMEPAGE="http://kevinboone.net/README_epub2txt.html"
@@ -26,5 +26,15 @@ DEPEND="
 "
 RDEPEND="${COMMON_DEPEND}"
 
-DOCS="README.md TODO CHANGES.txt"
-HTML_DOCS="README_epub2txt.html"
+DOCS="README.md TODO LICENSE"
+
+src_prepare() {
+	default
+	# prevent pre-stripping
+	sed -e 's:-s $(EXTRA_LDFLAGS):$(EXTRA_LDFLAGS):' -i Makefile
+}
+
+src_install() {
+	dobin epub2txt
+	doman man1/epub2txt.1
+}
