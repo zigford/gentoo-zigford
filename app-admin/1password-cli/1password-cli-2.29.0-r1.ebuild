@@ -22,8 +22,8 @@ BDEPEND=""
 S=${WORKDIR}
 
 src_install() {
-	chrgp onepassword-cli op
-	chmod g+s op
 	dobin op
+	chgrp onepassword-cli "${ED}/usr/bin/op" || die
+	chmod g+s "${ED}/usr/bin/op" || die
 }
 
