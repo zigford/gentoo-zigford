@@ -13,13 +13,17 @@ KEYWORDS="amd64"
 
 RESTRICT="mirror strip test bindist"
 
-DEPEND=""
+DEPEND="
+acct-group/onepassword-cli
+"
 RDEPEND="${DEPEND}"
 BDEPEND=""
 
 S=${WORKDIR}
 
 src_install() {
-  dobin op
+	chrgp onepassword-cli op
+	chmod g+s op
+	dobin op
 }
 
